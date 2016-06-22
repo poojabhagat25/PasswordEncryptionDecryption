@@ -52,4 +52,16 @@ public class PasswordEncoderGenerator implements PasswordEncoder {
 		return key;
 	}
 
+	 public static void main(String[] args) {
+	        try {
+	        String password = "123456";
+	            System.out.println("plain pass="+password);
+	            PasswordEncoderGenerator encoderGenerator=new PasswordEncoderGenerator();
+	        String encryptedPassword = encoderGenerator.encrypt(password,"pooja@yopmail.com");
+	            System.out.println("encrypted pass="+encryptedPassword);
+	        String decryptedPassword = encoderGenerator.decrypt(encryptedPassword,"pooja@yopmail.com");    
+	                System.out.println("decrypted pass="+decryptedPassword);
+	        } catch(Exception e) { System.out.println("bug"+e.getMessage()); }
+	    }
+	
 }

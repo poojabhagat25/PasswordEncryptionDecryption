@@ -18,6 +18,7 @@ import com.example.rest.dto.UserDTO;
 import com.example.rest.model.UserModel;
 import com.example.rest.util.ApplicationBeanUtil;
 import com.example.rest.util.EmailSender;
+import com.example.rest.util.FieldValidation;
 import com.example.rest.util.LocaleConverter;
 import com.example.rest.util.ResourceManager;
 import com.example.rest.util.TokenGenerator;
@@ -35,6 +36,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private FieldValidation fieldValidation;
+	
 	@Autowired
 	private Mapper dozerMapper;
 
@@ -60,6 +64,7 @@ public class UserServiceImpl implements UserService {
 		Locale locale = LocaleConverter.getLocaleFromRequest(request);
 		UserDTO userDTO = userDao.checkUser(userModel.getEmailId());
 		
+		fieldValidation.signUpValidation(userModel);
 		if (userDTO != null) {
 			// already exist
 			throw new UserException(ResourceManager.getMessage(USER_ALREADY_EXIST_EXCEPTION, null, NOT_FOUND, locale));
@@ -103,7 +108,9 @@ public class UserServiceImpl implements UserService {
 		if (user == null) {
 			throw new UserException(ResourceManager.getMessage(USER_NOT_REGISTERED, null, "not.found", locale));
 		}
-		if (user != null && !user.getPassword().equals(userModel.getPassword())) {
+		String password= passwordEncoder.decrypt(user.getPassword(), user.getEmailId());
+		System.out.println("**************** =>"+password);
+		if (user != null && !userModel.getPassword().equals(password)) {
 			throw new UserException(ResourceManager.getProperty(PASSWORD_MISMATCH));
 		}
 
