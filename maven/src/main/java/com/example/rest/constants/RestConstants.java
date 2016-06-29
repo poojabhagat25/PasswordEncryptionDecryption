@@ -5,7 +5,7 @@ public class RestConstants {
 	public static final String AUTHTOKEN = "authToken";
 	public static final String SIGN_UP_USER_URL = "/user";
 	public static final String LOGIN_URL = "/logIn";
-	public static final String FORGOT_PASSWORD = "/resendPassword";
+	public static final String FORGOT_PASSWORD = "/forgot_password";
 	public static final String AUTHTOKEN_KEYWORD = "authToken= ";
 	public static final String FAIL = "fail";
 	public static final String USER = "user";
@@ -29,5 +29,6 @@ public class RestConstants {
 	public static final String PASSWORD_MISMATCH = "exception.password.mismatch";
 	public static final String LOG_IN_FAILED = "exception.login.failed";
 	public static final String PLEASE_FILL_ALL_REQUIRED_FIELDS="exception.fill.all.required.fields";
+	public static final String PASSWORD_VALIDATION_FAILED="exception.password.validation.failed";
 
 }

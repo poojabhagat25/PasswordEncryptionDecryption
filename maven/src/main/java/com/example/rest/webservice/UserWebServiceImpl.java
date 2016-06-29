@@ -53,8 +53,19 @@ public class UserWebServiceImpl implements UserWebService {
 
 	}
 
+	/**
+	 * This method is for sign-up user.
+	 * 
+	 * @param UserModel
+	 *            contains user data
+	 * @param HttpServletRequest
+	 * @param HttpServletResponse
+	 * @return UserModel.
+	 * @throws UserException,
+	 *             Exception
+	 */
 	@POST
-	// @Override
+	@Override
 	public ResponseModel signUpUser(@Context HttpServletRequest request, @Context HttpServletResponse response,
 			UserModel userModel) throws Exception {
 		logger.info("<------inside signUpUser start------>");
@@ -68,9 +79,18 @@ public class UserWebServiceImpl implements UserWebService {
 		return responseModel;
 	}
 
+	/**
+	 * This method is for login purpose.
+	 * 
+	 * @param UserModel
+	 *            contains user emailId and password.
+	 * @param HttpServletRequest
+	 * @return UserModel.
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/logIn")
-	// @Override
+	@Override
 	public ResponseModel logIn(@Context HttpServletRequest request, UserModel userModel) throws Exception {
 		Locale locale = LocaleConverter.getLocaleFromRequest(request);
 		ResponseModel responseModel = null;
@@ -82,6 +102,15 @@ public class UserWebServiceImpl implements UserWebService {
 		return responseModel;
 	}
 
+	/**
+	 * forgot_password API.
+	 * 
+	 * @param UserModel
+	 *            contains user email address.
+	 * @param HttpServletRequest
+	 * @return ResponseModel.
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/forgot_password")
 	// @Override
@@ -94,6 +123,13 @@ public class UserWebServiceImpl implements UserWebService {
 		return responseModel;
 	}
 
+	/**
+	 * API to get all users.
+	 * 
+	 * @param HttpServletRequest
+	 * @return List<UserModel>.
+	 * @throws Exception
+	 */
 	@GET
 	@Path("/getUserList")
 	public ResponseModel getUserList(@Context HttpServletRequest request) throws Exception {
